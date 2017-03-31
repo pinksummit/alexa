@@ -4,7 +4,17 @@
       "intent": "HelloWorldIntent"
     },
     {
-      "intent": "AMAZON.HelpIntent"
+      "intent": "AddUnitIntent",
+      "slots": [
+        {
+          "name": "UnitNumber",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "IdNumber",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
     }
   ]
 }

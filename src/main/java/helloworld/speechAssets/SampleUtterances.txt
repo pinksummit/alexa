@@ -5,3 +5,9 @@ HelloWorldIntent say hi
 HelloWorldIntent say hi world
 HelloWorldIntent hi
 HelloWorldIntent how are you
+
+AddUnitIntent add unit {UnitNumber} to active on id {IdNumber}
+AddUnitIntent set unit {UnitNumber} to active on id {IdNumber}
+AddUnitIntent set unit {UnitNumber} to active on incident {IdNumber}
+AddUnitIntent set unit {UnitNumber} to active on incident number {IdNumber}
+AddUnitIntent add {UnitNumber} to {IdNumber}

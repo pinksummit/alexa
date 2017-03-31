@@ -58,8 +58,8 @@ public class HelloWorldSpeechlet implements Speechlet {
 
         if ("HelloWorldIntent".equals(intentName)) {
             return getHelloResponse();
-        } else if ("AMAZON.HelpIntent".equals(intentName)) {
-            return getHelpResponse();
+        } else if ("AddUnitIntent".equals(intentName)){
+            return addUnitToId(intent);
         } else {
             throw new SpeechletException("Invalid Intent");
         }
@@ -117,27 +117,25 @@ public class HelloWorldSpeechlet implements Speechlet {
         return SpeechletResponse.newTellResponse(speech, card);
     }
 
-    /**
-     * Creates a {@code SpeechletResponse} for the help intent.
-     *
-     * @return SpeechletResponse spoken and visual response for the given intent
-     */
-    private SpeechletResponse getHelpResponse() {
-        String speechText = "You can say hello to me!";
+    private SpeechletResponse addUnitToId(Intent intent) {
+        String unitNumber = intent.getSlot("UnitNumber").getValue();
+        String idNumber = intent.getSlot("IdNumber").getValue();
+        String speechText;
+        if (unitNumber == null) {
+            speechText = "Sorry, I could not understand the unit number. Please repeat your phrase.";
+        } else {
+            if (idNumber == null) {
+                speechText = "Sorry, I could not understand the id number. Please repeat your phrase.";
+            } else {
+                //TODO call
+                speechText = "OK, I updated unit " + unitNumber + " as active on incident " + idNumber;
+            }
+        }
 
-        // Create the Simple card content.
-        SimpleCard card = new SimpleCard();
-        card.setTitle("HelloWorld");
-        card.setContent(speechText);
-
-        // Create the plain text output.
         PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
         speech.setText(speechText);
 
-        // Create reprompt
-        Reprompt reprompt = new Reprompt();
-        reprompt.setOutputSpeech(speech);
-
-        return SpeechletResponse.newAskResponse(speech, reprompt, card);
+        return SpeechletResponse.newTellResponse(speech);
     }
+
 }
